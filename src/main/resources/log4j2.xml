@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <!-- derby -->
+        <RollingFile name="ApplicationAppender" fileName="dbqa/dbqa.log" filePattern="dbqa-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="50 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingFile>
+        <RollingFile name="QueryAppender" fileName="dbqa/query.log" filePattern="query-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d %p - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="50 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="QueryLogger" level="INFO" additivity="false">
+            <AppenderRef ref="QueryAppender"/>
+        </Logger>
+        <Logger name="ExceptionLogger" level="INFO" additivity="false">
+            <AppenderRef ref="ApplicationAppender"/>
+        </Logger>
+        <Root level="ERROR">
+            <AppenderRef ref="ApplicationAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

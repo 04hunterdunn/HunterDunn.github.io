@@ -1,0 +1,235 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>dbqa</groupId>
+  <artifactId>dbqa</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>dbqa</name>
+  <properties>
+	  <spring.version>5.3.20</spring.version>
+	  <hibernate.version>6.1.0.Final</hibernate.version>
+	  <jackson.version>2.13.3</jackson.version>
+	  <derby.version>10.15.2.0</derby.version>
+	  <log4j.version>2.17.2</log4j.version>
+	  <maven.compiler.source>17</maven.compiler.source>
+	  <maven.compiler.target>17</maven.compiler.target>
+  </properties>
+  
+  <dependencies>
+  	<!-- Servlet dependencies -->
+	  <dependency>
+		  <groupId>javax.servlet</groupId>
+		  <artifactId>javax.servlet-api</artifactId>
+		  <version>4.0.1</version>
+		  <scope>provided</scope>
+	  </dependency>
+    
+    <!-- Spring dependencies -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>8.0.29</version>
+	</dependency>
+
+	<!-- oracle dependencies -->
+	<!-- not managed by maven due to oracle authentication pains -->
+	
+	<!-- derby dependencies -->
+	<dependency>
+	    <groupId>org.apache.derby</groupId>
+	    <artifactId>derby</artifactId>
+	    <version>${derby.version}</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.apache.derby</groupId>
+	    <artifactId>derbyclient</artifactId>
+	    <version>${derby.version}</version>
+	</dependency>
+
+	  <dependency>
+		  <groupId>org.apache.derby</groupId>
+		  <artifactId>derbytools</artifactId>
+		  <version>${derby.version}</version>
+	  </dependency>
+
+	<!-- jstl dependencies -->
+	<dependency>
+	    <groupId>jstl</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
+	</dependency>
+	
+	<!-- hibernate dependencies -->
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-core</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+
+	  <!-- jUnit dependencies -->
+	  <dependency>
+		  <groupId>junit</groupId>
+		  <artifactId>junit</artifactId>
+		  <version>4.13.2</version>
+		  <scope>test</scope>
+	  </dependency>
+
+	  <!-- jackson dependencies -->
+	  <dependency>
+		  <groupId>com.fasterxml.jackson.core</groupId>
+		  <artifactId>jackson-core</artifactId>
+		  <version>${jackson.version}</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>com.fasterxml.jackson.core</groupId>
+		  <artifactId>jackson-annotations</artifactId>
+		  <version>${jackson.version}</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>com.fasterxml.jackson.core</groupId>
+		  <artifactId>jackson-databind</artifactId>
+		  <version>${jackson.version}</version>
+	  </dependency>
+
+	  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jdk8 -->
+	  <dependency>
+		  <groupId>com.fasterxml.jackson.datatype</groupId>
+		  <artifactId>jackson-datatype-jdk8</artifactId>
+		  <version>${jackson.version}</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>javax.xml.bind</groupId>
+		  <artifactId>jaxb-api</artifactId>
+		  <version>2.4.0-b180830.0359</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>com.sun.xml.bind</groupId>
+		  <artifactId>jaxb-core</artifactId>
+		  <version>4.0.0</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>com.sun.xml.bind</groupId>
+		  <artifactId>jaxb-impl</artifactId>
+		  <version>4.0.0</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>javax.activation</groupId>
+		  <artifactId>activation</artifactId>
+		  <version>1.1.1</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>com.auth0</groupId>
+		  <artifactId>java-jwt</artifactId>
+		  <version>3.19.2</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/org.json/json -->
+	  <dependency>
+		  <groupId>org.json</groupId>
+		  <artifactId>json</artifactId>
+		  <version>20220320</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/org.jasypt/jasypt -->
+	  <dependency>
+		  <groupId>org.jasypt</groupId>
+		  <artifactId>jasypt</artifactId>
+		  <version>1.9.3</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>org.bouncycastle</groupId>
+		  <artifactId>bcprov-jdk15on</artifactId>
+		  <version>1.70</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>io.jsonwebtoken</groupId>
+		  <artifactId>jjwt-api</artifactId>
+		  <version>0.11.5</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>io.jsonwebtoken</groupId>
+		  <artifactId>jjwt-impl</artifactId>
+		  <version>0.11.5</version>
+		  <scope>runtime</scope>
+	  </dependency>
+	  <dependency>
+		  <groupId>io.jsonwebtoken</groupId>
+		  <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
+		  <version>0.11.5</version>
+		  <scope>runtime</scope>
+	  </dependency>
+	  <dependency>
+		  <groupId>org.imsglobal</groupId>
+		  <artifactId>basiclti-util</artifactId>
+		  <version>1.2.0</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/net.bull.javamelody/javamelody-core -->
+	  <dependency>
+		  <groupId>net.bull.javamelody</groupId>
+		  <artifactId>javamelody-core</artifactId>
+		  <version>1.91.0</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-c3p0</artifactId>
+		  <version>${hibernate.version}</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+	  <dependency>
+		  <groupId>com.mchange</groupId>
+		  <artifactId>c3p0</artifactId>
+		  <version>0.9.5.5</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/org.inferred/freebuilder -->
+	  <dependency>
+		  <groupId>org.inferred</groupId>
+		  <artifactId>freebuilder</artifactId>
+		  <version>2.7.0</version>
+	  </dependency>
+
+	  <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+	  <dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-core</artifactId>
+		  <version>${log4j.version}</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-api</artifactId>
+		  <version>${log4j.version}</version>
+	  </dependency>
+  </dependencies>
+	<build>
+		<finalName>dbqa</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.1</version>
+			</plugin>
+		</plugins>
+	</build>
+</project>

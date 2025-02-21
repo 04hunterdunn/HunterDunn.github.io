@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--  Derby -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.connection.url">jdbc:derby:dbqaDB;create=true</property>
+        <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.DerbyTenSevenDialect</property>
+        <property name="hibernate.id.new_generator_mappings">false</property>
+        <property name="hibernate.connection.username"></property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+
+        <!-- JDBC connection pooling with c3p0 -->
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.acquire_increment">5</property>
+        <!--<property name="hibernate.c3p0.timeout">25200</property>--> <!-- 7 hrs, 1 hr less than default db timeout -->
+        <property name="hibernate.c3p0.checkoutTimeout">1000</property> <!-- The number of milliseconds a client calling getConnection() will wait for a Connection to be checked-in or acquired when the pool is exhausted. Zero means wait indefinitely. Setting any positive value will cause the getConnection() call to time-out and break with an SQLException after the specified number of milliseconds -->
+        <property name="hibernate.c3p0.automaticTestTable">C3P0_TEST_TABLE</property>
+        <property name="hibernate.c3p0.testConnectionOnCheckin">true</property> <!-- an operation will be performed asynchronously at every connection checkin to verify that the connection is valid -->
+        <property name="hibernate.c3p0.idleConnectionTestPeriod">25200</property> <!-- test all idle, pooled but unchecked-out connections every 7 hrs (1 hr less than default db timeout) -->
+
+        <!-- Model mappings -->
+        <mapping class="dbqa.model.DbqaUser" />
+        <mapping class="dbqa.model.Database" />
+        <mapping class="dbqa.model.DatabaseType" />
+        <mapping class="dbqa.model.QueryExample" />
+        <mapping class="dbqa.model.LtiConsumer" />
+    </session-factory>
+</hibernate-configuration>
