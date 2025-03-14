@@ -15,6 +15,7 @@ $(document).ready(function() {
 		}
 	});
 
+	//links with the checkbox in query.jsp for the highlight
 	$("#highlightPrevious").click(function () {
 		highlightPrevious();
 		if ($("#highlightPrevious").prop("checked") == true) {
@@ -23,6 +24,12 @@ $(document).ready(function() {
 			logInteraction("unhighlight previous fragments");
 		}
 	});
+
+	//add step explanation here? or call add highlight and generate step explanation??
+	$("#displayStepExplanation").click(function () {
+		//logInteraction("display explanation");
+		console.log("display explanation");
+	})
 
 	if($("#exceptionQuery").val() !== "") {
 		document.getElementById("parentDisplay").innerHTML='<textarea class="form-control" id="inputTextArea" rows="6" name="query" required>'+query+'</textarea>';
