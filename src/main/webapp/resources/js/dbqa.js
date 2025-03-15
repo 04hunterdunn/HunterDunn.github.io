@@ -33,7 +33,7 @@ $(document).ready(function() {
 		else{
 			document.getElementById("stepExplanation").style.display = "none";
 		}
-	})
+	});
 
 	if($("#exceptionQuery").val() !== "") {
 		document.getElementById("parentDisplay").innerHTML='<textarea class="form-control" id="inputTextArea" rows="6" name="query" required>'+query+'</textarea>';
