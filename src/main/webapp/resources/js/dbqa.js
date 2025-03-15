@@ -27,8 +27,12 @@ $(document).ready(function() {
 
 	//add step explanation here? or call add highlight and generate step explanation??
 	$("#displayStepExplanation").click(function () {
-		//logInteraction("display explanation");
-		console.log("display explanation");
+		if($("#displayStepExplanation").prop("checked") == true) {
+			document.getElementById("stepExplanation").style.display = "block";
+		}
+		else{
+			document.getElementById("stepExplanation").style.display = "none";
+		}
 	})
 
 	if($("#exceptionQuery").val() !== "") {
