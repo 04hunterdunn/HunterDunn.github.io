@@ -21,7 +21,7 @@ public class QueryAnalyzer {
 	private HttpServletRequest request;
 	private int queryNestingLevel = 0;
 	//consider replacing with list of operators associated with database type (would also need to update dbqa.js)
-	private String[] setOperators = {"UNION"};
+	private String[] setOperators = {"UNION", "UNION ALL", "EXCEPT", "INTERSECT"};
 
 	public QueryAnalyzer(Database database) {
 		this.database = database;
