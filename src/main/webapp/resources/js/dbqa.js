@@ -15,12 +15,23 @@ $(document).ready(function() {
 		}
 	});
 
+	//links with the checkbox in query.jsp for the highlight
 	$("#highlightPrevious").click(function () {
 		highlightPrevious();
 		if ($("#highlightPrevious").prop("checked") == true) {
 			logInteraction("highlight previous fragments");
 		} else {
 			logInteraction("unhighlight previous fragments");
+		}
+	});
+
+	//add step explanation here? or call add highlight and generate step explanation??
+	$("#displayStepExplanation").click(function () {
+		if($("#displayStepExplanation").prop("checked") == true) {
+			document.getElementById("stepExplanation").style.display = "block";
+		}
+		else{
+			document.getElementById("stepExplanation").style.display = "none";
 		}
 	});
 

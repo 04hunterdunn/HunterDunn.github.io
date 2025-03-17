@@ -77,6 +77,8 @@
 
 
 							<label style="padding-left: 10px;"><input type="checkbox" id="highlightPrevious" name="highlightPrevious" value="true" <c:if test="${highlightPrevious}">checked</c:if>> Highlight Previous Steps</label>
+							<label style="padding-left: 10px;"><input type="checkbox" id="displayStepExplanation" name="displayStepExplanation" value="true" <c:if test="${displayStepExplanation}">checked</c:if>> Display Step Explanation</label>
+
 						</div>
 					</form>
 				</div>
