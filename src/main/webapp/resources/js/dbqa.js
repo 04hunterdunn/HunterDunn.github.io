@@ -352,9 +352,9 @@ function generateStepExplanation(fragment) {
 		}
 	}
 	//UNION or UNION ALL
-	else if(upperCaseFragment.startsWith("UNION ")  || upperCaseFragment.startsWith("UNION ALL ")) {
+	else if(upperCaseFragment.startsWith("UNION")  || upperCaseFragment.startsWith("UNION ALL")) {
 	 	let finalString = "";
-		 if(upperCaseFragment.startsWith("UNION ")) {
+		 if(upperCaseFragment === "UNION") {
 			 finalString = "Add all rows from the second query result set that aren't already in the first query result set.";
 		 } else {
 			 finalString = "Add all rows from the second query result set to the first query result set whether or not there are duplicate values."
