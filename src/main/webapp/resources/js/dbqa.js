@@ -352,106 +352,14 @@ function generateStepExplanation(fragment) {
 		}
 	}
 	//UNION or UNION ALL
-	else if(upperCaseFragment.startsWith("UNION ")  || upperCaseFragment.startsWith("UNION ALL")) {
-		let finalString = "";
-		let queryArray = "";
-		if(upperCaseFragment.startsWith("UNION ALL ")) {
-			finalString = "UNION ALL ";
-			queryArray = query.split("UNION ALL ");
-		} else {
-			finalString = "UNION ";
-			queryArray = query.split("UNION ");
-		}
-
-		//add columns to finalString first
-		let selectStatement = query.split("FROM");
-
-		//'SELECT ' = index 0-6. Thus, index 7 is the start of where columns are named.
-		let columns = selectStatement[0].substring(7);
-
-		//check to see if were unioning all columns
-		if(columns === "*" || columns === "All" || columns === "ALL" || columns === "all") {
-			finalString = finalString + "all columns from "
-		} else {
-			let columnsArray = columns.split(",");
-			for(let i = 0; i < columnsArray.length; i++) {
-				//check to see if this is the last column being Unioned
-				if(i !== columnsArray.length - 1) {
-					finalString = finalString + columnsArray[i] + ", "
-				} else {
-					finalString = finalString + columnsArray[i] + "from ";
-				}
-			}
-		}
-
-		//add which tables you unioned.
-		for(let i = 0; i < queryArray.length; i++) {
-			let upperCaseQuery = queryArray[i].toUpperCase();
-			let whereIndex = upperCaseQuery.indexOf("WHERE");
-			//check to see if a Where statement is present
-			if(whereIndex !== -1) {
-				upperCaseQuery = upperCaseQuery.substring(0, whereIndex);
-			}
-			let fromUpperCaseQuery = upperCaseQuery.indexOf("FROM ");
-			let table = upperCaseQuery.substring(fromUpperCaseQuery + 5);
-
-			//check to see if this table is the last table to be UNIONed
-			if(i !== queryArray.length - 1) {
-				finalString = finalString + " " + table + " and";
-			} else {
-				finalString = finalString + " " + table + ".";
-			}
-		}
-		/*
-		// UNION or UNION ALL
-	else if (upperCaseFragment.startsWith("UNION ") || upperCaseFragment.startsWith("UNION ALL")) {
-    	let finalString = upperCaseFragment.startsWith("UNION ALL ") ? "UNION ALL " : "UNION ";
-
-    	// Split query into parts by UNION / UNION ALL (case insensitive)
-    	let queryArray = query.split(/\bUNION(?: ALL)?\b/i);
-
-    	// Extract columns from the first SELECT statement
-    	let selectMatch = query.match(/SELECT\s+(.+?)\s+FROM/i);
-    	let columns = selectMatch ? selectMatch[1].trim() : "";
-
-    	// Check for "all columns" case
-    	if (/^\*|all$/i.test(columns)) {
-        	finalString += "all columns from ";
-    	} else {
-        	let columnsArray = columns.split(/\s*,\s*()/);  /remove parentheses after s*
-			finalString += columnsArray.join(", ") + " from ";
-		}
-
-		// Extract table names
-		let tableNames = [];
-		for (let i = 0; i < queryArray.length; i++) {
-			let fromMatch = queryArray[i].match(/\bFROM\s+([^\s,]+)/i);
-			if (fromMatch) {
-				tableNames.push(fromMatch[1]);
-			}
-		}
-
-		// Format table listing properly
-		finalString += tableNames.join(" and ") + ".";
-
-		// Append UNION type description
-		if (upperCaseFragment.startsWith("UNION ALL ")) {
-			finalString += " Duplicate values are still present.";
-		} else {
-			finalString += " Removed all duplicate values as well.";
-		}
-
-		$("#stepExplanationText").text(finalString);
-	}
-		*/
-
-
-		if(upperCaseFragment.startsWith("UNION ALL ")) {
-			finalString = finalString + " Duplicate values are still present."
-		} else {
-			finalString = finalString + " Removed all duplicate values as well.";
-		}
-		$("#stepExplanationText").text(finalString);
+	else if(upperCaseFragment.startsWith("UNION ")  || upperCaseFragment.startsWith("UNION ALL ")) {
+	 	let finalString = "";
+		 if(upperCaseFragment.startsWith("UNION ")) {
+			 finalString = "Add all rows from the second query result set that aren't already in the first query result set.";
+		 } else {
+			 finalString = "Add all rows from the second query result set to the first query result set whether or not there are duplicate values."
+		 }
+		 $("#stepExplanationText").text(finalString);
 	}
 
 	else if(upperCaseFragment.startsWith("INTERSECT ")) {
