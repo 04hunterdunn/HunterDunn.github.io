@@ -361,12 +361,13 @@ function generateStepExplanation(fragment) {
 		 }
 		 $("#stepExplanationText").text(finalString);
 	}
-
-	else if(upperCaseFragment.startsWith("INTERSECT ")) {
-
+	//intersect
+	else if(upperCaseFragment.startsWith("INTERSECT")){
+		$("#stepExplanationText").text("Returns the rows that are present in both queries: " + fragment);
 	}
-	else if(upperCaseFragment.startsWith("EXCEPT ")) {
-
+	//except
+	else if(upperCaseFragment.startsWith("EXCEPT")){
+		$("#stepExplanationText").text("Returns rows from the first query that are not present in the second query: " + fragment);
 	}
 	//where or having clause
 	else {
