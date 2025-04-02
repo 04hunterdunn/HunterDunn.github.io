@@ -27,6 +27,10 @@ public class DbqaUser {
     private String salt;
 
     @ManyToMany
+    @JoinTable(
+            joinColumns = {@JoinColumn(name = "dbqaUserID")},
+            inverseJoinColumns = {@JoinColumn(name = "databaseId")}
+    )
     private List<Database> databases;
 
     public DbqaUser() {

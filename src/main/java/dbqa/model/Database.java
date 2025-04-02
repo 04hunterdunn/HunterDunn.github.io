@@ -31,9 +31,6 @@ public class Database {
     @Column(name="password")
     private String password;
 
-    @ManyToMany
-    private List<DbqaUser> dbqaUsers;
-
     public Database() {
 
     }
@@ -92,14 +89,6 @@ public class Database {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<DbqaUser> getDbqaUsers() {
-        return dbqaUsers;
-    }
-
-    public void setDbqaUsers(List<DbqaUser> dbqaUsers) {
-        this.dbqaUsers = dbqaUsers;
     }
 
     @Override
