@@ -21,7 +21,7 @@ public class QueryAnalyzer {
 	private HttpServletRequest request;
 	private int queryNestingLevel = 0;
 	//consider replacing with list of operators associated with database type (would also need to update dbqa.js)
-	private String[] setOperators = {"UNION", "UNION ALL", "EXCEPT", "INTERSECT"};
+	private String[] setOperators = {"UNION ALL", "UNION", "EXCEPT", "INTERSECT"};
 
 	public QueryAnalyzer(Database database) {
 		this.database = database;
@@ -449,17 +449,8 @@ public class QueryAnalyzer {
 	}
 
 	public ArrayList<String> handleSetOperators(String sql) throws SQLException {
-		String[] originalQuery = sql.split("\\s+");
-		String querySection = "";
-		boolean complete = false;
-		int wordIdx = 0;
 		List<String> setOperationStrings = Arrays.asList(setOperators);
-
-
-		
-		//break up queries into an arrayList<String> where each String = querySection
 		ArrayList<String> queries = new ArrayList<>();
-		ArrayList<String> setOperators = new ArrayList<>();
 		int indexOfSetOperator = -1;
 		String setOperatorPresent = "";
 
@@ -485,46 +476,6 @@ public class QueryAnalyzer {
 		} else {
 			return null;
 		}
-
-
-		/*
-		while (wordIdx < originalQuery.length) {
-			if (!setOperationStrings.contains(originalQuery[wordIdx].toUpperCase())) {
-				querySection += (originalQuery[wordIdx] + " ");
-				wordIdx++;
-			}
-			//found set operator
-			else {
-				//add querySection to the arrayLists
-				queries.add(querySection.trim());
-				//start new query string
-				querySection = "";
-				//add set operator to arrayList
-				setOperators.add(originalQuery[wordIdx].trim());
-
-				wordIdx++;
-				//handle "UNION ALL"
-				if ((wordIdx < originalQuery.length) && originalQuery[wordIdx].equalsIgnoreCase("ALL")) {
-					setOperators.set(setOperators.size()-1, setOperators.get(setOperators.size()-1) + " " + originalQuery[wordIdx].trim());
-					wordIdx++;
-				}
-			}
-		}
-		//add final querySection to the arrayLists
-		queries.add(querySection.trim());
-
-		if(DatabaseDao.isSetOperationValid(database, queries)) {
-			//update queries list with set operators in postfix notation for processing purposes
-			int queriesIndex = 2;
-			for(String setOperator: setOperators) {
-				queries.add(queriesIndex, setOperator);
-				queriesIndex += 3;
-			}
-			return queries;
-		} else {
-			return null;
-		}
-		 */
 	}
 
 	public void processFromClause(int startingIndex, String fromClause, String originalQuery, ArrayList<ParserResult> listOfResults) throws SQLException {
