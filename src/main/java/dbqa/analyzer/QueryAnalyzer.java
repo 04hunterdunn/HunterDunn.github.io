@@ -454,10 +454,40 @@ public class QueryAnalyzer {
 		boolean complete = false;
 		int wordIdx = 0;
 		List<String> setOperationStrings = Arrays.asList(setOperators);
+
+
 		
 		//break up queries into an arrayList<String> where each String = querySection
 		ArrayList<String> queries = new ArrayList<>();
 		ArrayList<String> setOperators = new ArrayList<>();
+		int indexOfSetOperator = -1;
+		String setOperatorPresent = "";
+
+		for(String setOperation: setOperationStrings) {
+			indexOfSetOperator = sql.toUpperCase().indexOf(setOperation);
+			if(indexOfSetOperator != -1) {
+				setOperatorPresent = setOperation;
+				break;
+			}
+		}
+
+		String firstQuery = sql.substring(0, indexOfSetOperator);
+		queries.add(firstQuery);
+
+		String secondQuery = sql.substring(indexOfSetOperator);
+		int indexOfSecondSelect = secondQuery.indexOf("SELECT");
+		secondQuery = secondQuery.substring(indexOfSecondSelect);
+		queries.add(secondQuery);
+
+		if(DatabaseDao.isSetOperationValid(database, queries)) {
+			queries.add(setOperatorPresent);
+			return queries;
+		} else {
+			return null;
+		}
+
+
+		/*
 		while (wordIdx < originalQuery.length) {
 			if (!setOperationStrings.contains(originalQuery[wordIdx].toUpperCase())) {
 				querySection += (originalQuery[wordIdx] + " ");
@@ -494,6 +524,7 @@ public class QueryAnalyzer {
 		} else {
 			return null;
 		}
+		 */
 	}
 
 	public void processFromClause(int startingIndex, String fromClause, String originalQuery, ArrayList<ParserResult> listOfResults) throws SQLException {
