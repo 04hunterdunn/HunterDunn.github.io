@@ -27,12 +27,7 @@ $(document).ready(function() {
 
 	//add step explanation here? or call add highlight and generate step explanation??
 	$("#displayStepExplanation").click(function () {
-		if($("#displayStepExplanation").prop("checked") == true) {
-			document.getElementById("stepExplanation").style.display = "block";
-		}
-		else{
-			document.getElementById("stepExplanation").style.display = "none";
-		}
+		checkStep();
 	});
 
 	if($("#exceptionQuery").val() !== "") {
@@ -41,6 +36,15 @@ $(document).ready(function() {
 
 	$('[data-toggle="tooltip"]').tooltip();
 });
+
+function checkStep(){
+	if($("#displayStepExplanation").prop("checked") == true) {
+		document.getElementById("stepExplanation").style.display = "block";
+	}
+	else{
+		document.getElementById("stepExplanation").style.display = "none";
+	}
+}
 
 function highlightPrevious() {
 	if ($("#highlightPrevious").prop("checked") == true) {
