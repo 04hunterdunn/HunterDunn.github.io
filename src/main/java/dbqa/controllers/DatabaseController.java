@@ -38,7 +38,11 @@ public class DatabaseController {
         String name = request.getParameter("name");
         String url = request.getParameter("url");
         String username = request.getParameter("username");
-        String password = JasyptUtil.encrypt(request.getParameter("password"));
+        //String password = JasyptUtil.encrypt(request.getParameter("password"));
+        //changed by sampreeth on 4/9/2025 at 12:09pm
+        String rawPassword = request.getParameter("password");
+        String password = (rawPassword == null || rawPassword.trim().isEmpty()) ? null : JasyptUtil.encrypt(rawPassword);
+
 
         Database database = DatabaseDao.insertOrRetrieveDatabase(new Database(databaseType, name, url, username, password));
         if(database != null) {
