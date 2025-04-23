@@ -67,7 +67,8 @@ public class DatabaseController {
         }
         if(databaseId == Database.DEFAULT_DATABASE_ID) {
             Database selectedDatabase = DatabaseDao.getDefaultDatabase();
-            redirectAttributes.addFlashAttribute("selectedDatabase", selectedDatabase);
+//            redirectAttributes.addFlashAttribute("selectedDatabase", selectedDatabase);
+            request.getSession().setAttribute("selectedDatabase", selectedDatabase);
             DatabaseDao.addDatabaseSchemaToSession(selectedDatabase, request);
         } else {
             for (Database database : user.getDatabases()) {
