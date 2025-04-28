@@ -36,6 +36,7 @@ $(document).ready(function() {
 	});
 
 	if($("#exceptionQuery").val() !== "") {
+		query = $("#exceptionQuery").val();
 		document.getElementById("parentDisplay").innerHTML='<textarea class="form-control" id="inputTextArea" rows="6" name="query" required>'+query+'</textarea>';
 	}
 
