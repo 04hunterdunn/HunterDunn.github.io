@@ -258,10 +258,8 @@ public class DatabaseDao extends HibernateDao {
                                 }
                             }
                         }
-                        if(!tableName.startsWith("_")) {
-                            dbSchema.put(tableName, columnNames);
-                            tableData.put(tableName, getQueryResultSet("SELECT * FROM " + tableName, session));
-                        }
+                        dbSchema.put(tableName, columnNames);
+                        tableData.put(tableName, getQueryResultSet("SELECT * FROM " + tableName, session));
                     }
                 }
             });

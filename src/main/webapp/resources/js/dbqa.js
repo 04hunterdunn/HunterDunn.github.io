@@ -27,7 +27,12 @@ $(document).ready(function() {
 
 	//add step explanation here? or call add highlight and generate step explanation??
 	$("#displayStepExplanation").click(function () {
-		checkStep();
+		if($("#displayStepExplanation").prop("checked") == true) {
+			document.getElementById("stepExplanation").style.display = "block";
+		}
+		else{
+			document.getElementById("stepExplanation").style.display = "none";
+		}
 	});
 
 	if($("#exceptionQuery").val() !== "") {
@@ -36,15 +41,6 @@ $(document).ready(function() {
 
 	$('[data-toggle="tooltip"]').tooltip();
 });
-
-function checkStep(){
-	if($("#displayStepExplanation").prop("checked") == true) {
-		document.getElementById("stepExplanation").style.display = "block";
-	}
-	else{
-		document.getElementById("stepExplanation").style.display = "none";
-	}
-}
 
 function highlightPrevious() {
 	if ($("#highlightPrevious").prop("checked") == true) {
@@ -365,13 +361,12 @@ function generateStepExplanation(fragment) {
 		 }
 		 $("#stepExplanationText").text(finalString);
 	}
-	//intersect
-	else if(upperCaseFragment.startsWith("INTERSECT")){
-		$("#stepExplanationText").text("Returns the rows that are present in both queries: " + fragment);
+
+	else if(upperCaseFragment.startsWith("INTERSECT ")) {
+
 	}
-	//except
-	else if(upperCaseFragment.startsWith("EXCEPT")){
-		$("#stepExplanationText").text("Returns rows from the first query that are not present in the second query: " + fragment);
+	else if(upperCaseFragment.startsWith("EXCEPT ")) {
+
 	}
 	//where or having clause
 	else {
