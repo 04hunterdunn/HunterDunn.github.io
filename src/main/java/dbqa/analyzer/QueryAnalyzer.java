@@ -36,6 +36,49 @@ public class QueryAnalyzer {
 		return this.database;
 	}
 
+	public ArrayList<ParserResult> parseQueryWithSetOperators(int startingIndex, String query, String outerQuery, ArrayList<ParserResult> listOfResults) throws ClassNotFoundException, SQLException{
+		ArrayList<String> setOperatorQueries = handleSetOperators(query);
+		if(setOperatorQueries == null) {
+			throw new SQLException("Set operands do not produce the same number and/or types of columns.");
+		}
+
+		String setQuery;
+		String setOperator;
+		int queryIndex = 0;
+		int leftQueryIndex = 0;
+		String generatedQuery;
+		for(int i=0; i<setOperatorQueries.size(); i++) {
+			//process set operator
+			if (i % 3 == 2) {
+				setOperator = setOperatorQueries.get(i);
+				queryIndex = startingIndex + query.indexOf(setOperator, leftQueryIndex);
+				generatedQuery = setOperatorQueries.get(i - 2) + " " + setOperator + "\r\n" + setOperatorQueries.get(i - 1);
+				createAndAddParserResult(queryIndex, setOperator, generatedQuery, query, listOfResults);
+			}
+			//process query
+			else {
+				setQuery = setOperatorQueries.get(i);
+				queryIndex = query.indexOf(setQuery, queryIndex);
+				//save the index of the query before the set operator so know where to start looking for the set operator when Plighting
+				if (i % 3 == 0) {
+					leftQueryIndex = queryIndex;
+					if (queryNestingLevel > 0) {
+						queryNestingLevel--;
+					}
+				} else {
+					queryNestingLevel++;
+				}
+				if (outerQuery == null) {
+					parseQuery(queryIndex, setQuery, query, listOfResults);
+				} else {
+					parseQuery(queryIndex + outerQuery.length(), setQuery, outerQuery, listOfResults);
+				}
+				queryIndex += setQuery.length();
+			}
+
+		}
+		return listOfResults;
+	}
 	
 	public ArrayList<ParserResult> parseQuery(String query, ArrayList<ParserResult> listOfResults) throws ClassNotFoundException, SQLException{
 		String outerQuery = query;
@@ -45,41 +88,7 @@ public class QueryAnalyzer {
 			outerQuery = query.substring(0, startInnerQueryIndex);
 		}
 		if(containsSetOperation(outerQuery)) {
-			ArrayList<String> setOperatorQueries = handleSetOperators(query);
-			if(setOperatorQueries == null) {
-				throw new SQLException("Set operands do not produce the same number and/or types of columns.");
-			}
-
-			String setQuery;
-			String setOperator;
-			int queryIndex = 0;
-			int leftQueryIndex = 0;
-			String generatedQuery;
-			for(int i=0; i<setOperatorQueries.size(); i++) {
-				//process set operator
-				if(i%3==2) {
-					setOperator = setOperatorQueries.get(i);
-					queryIndex = query.indexOf(setOperator, leftQueryIndex);
-					generatedQuery = setOperatorQueries.get(i-2) + " " + setOperator + "\r\n " + setOperatorQueries.get(i-1);
-					createAndAddParserResult(queryIndex, setOperator, generatedQuery, query, listOfResults);
-				}
-				//process query
-				else {
-					setQuery = setOperatorQueries.get(i);
-					queryIndex = query.indexOf(setQuery, queryIndex);
-					//save the index of the query before the set operator so know where to start looking for the set operator when Plighting
-					if(i%3 == 0) {
-						leftQueryIndex = queryIndex;
-						if(queryNestingLevel > 0) {
-							queryNestingLevel--;
-						}
-					} else {
-						queryNestingLevel++;
-					}
-					parseQuery(queryIndex, setQuery, query, listOfResults);
-					queryIndex += setQuery.length();
-				}
-			}
+			parseQueryWithSetOperators(0, query, null, listOfResults);
 			return listOfResults;
 		} else {
 			return parseQuery(0, query, null, listOfResults);
@@ -101,48 +110,11 @@ public class QueryAnalyzer {
 			outerQuery = query.substring(0, startInnerQueryIndex);
 			int outerQueryLength = outerQuery.length();
 			if(containsSetOperation(subquery)) {
-				ArrayList<String> setOperatorQueries = handleSetOperators(subquery);
-				if(setOperatorQueries == null) {
-					throw new SQLException("Set operands do not produce the same number and/or types of columns.");
-				}
-
-				String setQuery;
-				String setOperator;
-				int subQueryIndex = 0;
-				int leftQueryIndex = 0;
-				String generatedQuery;
-
-				for(int i=0; i<setOperatorQueries.size(); i++) {
-					if(i%3==2) {
-						setOperator = setOperatorQueries.get(i);
-						subQueryIndex = outerQueryLength + subquery.indexOf(setOperator, leftQueryIndex);
-						generatedQuery = setOperatorQueries.get(i-2) + " " + setOperator + "\r\n " + setOperatorQueries.get(i-1);
-						createAndAddParserResult(subQueryIndex, setOperator, generatedQuery, query, listOfResults);
-					}
-					else {
-						setQuery = setOperatorQueries.get(i);
-						subQueryIndex = subquery.indexOf(setQuery, subQueryIndex);
-						if(i%3 == 0) {
-							leftQueryIndex = subQueryIndex;
-							if(queryNestingLevel > 0) {
-								queryNestingLevel--;
-							} else {
-								queryNestingLevel++;
-							}
-						}
-						parseQuery(subQueryIndex + outerQueryLength, setQuery, outerQuery, listOfResults);
-						subQueryIndex += setQuery.length();
-					}
-				}
-				parseQuery(subquery, listOfResults);
+				parseQueryWithSetOperators(outerQueryLength, subquery, outerQuery, listOfResults);
 			} else {
 				parseQuery(clauseIndex + subIndex, subquery, query, listOfResults);
 			}
 			subIndex += subquery.length();
-			/*
-			parseQuery(clauseIndex + subIndex, subquery, query, listOfResults);
-			subIndex += subquery.length();
-			 */
 		}
 		processFromClause(clauseIndex, fromClause, query, listOfResults);
 
@@ -159,49 +131,11 @@ public class QueryAnalyzer {
 				outerQuery = query.substring(0, startInnerQueryIndex);
 				int outerQueryLength = outerQuery.length();
 				if(containsSetOperation(subquery)) {
-					ArrayList<String> setOperatorQueries = handleSetOperators(subquery);
-					if(setOperatorQueries == null) {
-						throw new SQLException("Set operands do not produce the same number and/or types of columns.");
-					}
-
-					String setQuery;
-					String setOperator;
-					int subQueryIndex = 0;
-					int leftQueryIndex = 0;
-					String generatedQuery;
-
-					for(int i=0; i<setOperatorQueries.size(); i++) {
-						//process set operator
-						if(i%3==2) {
-							setOperator = setOperatorQueries.get(i);
-							subQueryIndex = outerQueryLength + subquery.indexOf(setOperator, leftQueryIndex);
-							generatedQuery = setOperatorQueries.get(i-2) + " " + setOperator + "\r\n " + setOperatorQueries.get(i-1);
-							createAndAddParserResult(subQueryIndex, setOperator, generatedQuery, subquery, listOfResults);
-						}
-						//process query
-						else {
-							setQuery = setOperatorQueries.get(i);
-							subQueryIndex = subquery.indexOf(setQuery, subQueryIndex);
-							if(i%3 == 0) {
-								leftQueryIndex = subQueryIndex;
-								if(queryNestingLevel > 0) {
-									queryNestingLevel--;
-								} else {
-									queryNestingLevel++;
-								}
-							}
-							parseQuery(subQueryIndex + outerQueryLength, setQuery, outerQuery, listOfResults);
-							subQueryIndex += setQuery.length();
-						}
-					}
+					parseQueryWithSetOperators(outerQueryLength, subquery, outerQuery, listOfResults);
 				} else {
 					parseQuery(clauseIndex + subIndex, subquery, query, listOfResults);
 				}
 				subIndex += subquery.length();
-				/*
-				parseQuery(clauseIndex + subIndex, subquery, query, listOfResults);
-				subIndex += subquery.length();
-				 */
 			}
 			processWhereClause(clauseIndex, whereClause, query, outerQuery, listOfResults, null, lastParserResult.getGeneratedQuery());
 		}
