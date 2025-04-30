@@ -22,7 +22,8 @@
                                     <option value="${dbType.databaseTypeId}">${dbType.typeName}</option>
                                 </c:forEach>
                             </select>
-                            <a href="/dbqa/database/add_type">Add database type</a>
+                            <%--Hit this button once on the add database page and then comment out --%>
+                            <a href="/dbqa/database/add_type">Add database types</a>
                         </div>
                         <div class="form-group">
                             <label for="name">Name</label>

@@ -82,42 +82,83 @@ public class DatabaseController {
         return "redirect:/query";
     }
 
+    // We don't go to this page anymore, so i comment out
+//    @RequestMapping(value = "/database/add_type", method = RequestMethod.GET)
+//    public String getAddDatabaseTypePage(ModelMap model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+//        DbqaUser user = DbqaUtil.getSessionUser(request);
+//        if(user == null) {
+//            return DbqaUtil.noAccessRedirect(redirectAttributes);
+//        }
+//        return "add_database_type";
+//    }
+
     @RequestMapping(value = "/database/add_type", method = RequestMethod.GET)
-    public String getAddDatabaseTypePage(ModelMap model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    public String hardCodeDatabaseType(ModelMap model, HttpServletRequest request, RedirectAttributes redirectAttributes){
         DbqaUser user = DbqaUtil.getSessionUser(request);
         if(user == null) {
             return DbqaUtil.noAccessRedirect(redirectAttributes);
         }
-        return "add_database_type";
-    }
-
-    @RequestMapping(value = "/database/add_type", method = RequestMethod.POST)
-    public String handleAddDatabaseType(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        DbqaUser user = DbqaUtil.getSessionUser(request);
-        if(user == null) {
-            return DbqaUtil.noAccessRedirect(redirectAttributes);
-        }
-
-        String name = request.getParameter("name");
-        String driver = request.getParameter("driver");
-        String dialect = request.getParameter("dialect");
-        String catalog = request.getParameter("catalog");
-        String schema = request.getParameter("schema");
-        boolean usernameAsSchema = request.getParameter("usernameAsSchema") != null;
-
-        if(catalog == null || catalog.isEmpty()) {
-            catalog = null;
-        }
-        if(schema == null || schema.isEmpty()) {
-            schema = null;
-        }
-
+        // WHEN THIS CODE IS RAN ONCE, COMMENT OUT LINE 25 IN add_database.jsp
+        String name = "Derby";
+        String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+        String dialect = "org.hibernate.dialect.DerbyTenSevenDialect";
+//        String name = "Yo";
+//        String driver = "yo";
+//        String dialect = "yO";
+        String catalog = null;
+        String schema = null;
+        boolean usernameAsSchema = false;
         DatabaseType databaseType = DatabaseDao.insertOrRetrieveDatabaseType(new DatabaseType(name, driver, dialect, catalog, schema, usernameAsSchema));
         if(databaseType != null) {
             redirectAttributes.addFlashAttribute("success", "Your database type has been added");
         } else {
             redirectAttributes.addFlashAttribute("error", "An error occurred");
         }
+
+        name = "MySQL";
+        driver = "com.mysql.cj.jdbc.Driver";
+        dialect = "org.hibernate.dialect.MySQL8Dialect";
+//        name = "Ha";
+//        driver = "ha";
+//        dialect = "hA";
+        databaseType = DatabaseDao.insertOrRetrieveDatabaseType(new DatabaseType(name, driver, dialect, catalog, schema, usernameAsSchema));
+        if(databaseType != null) {
+            redirectAttributes.addFlashAttribute("success", "Your database type has been added");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "An error occurred");
+        }
+
         return "redirect:/database/add";
     }
+
+    // We don't go to this page anymore, so i comment out
+//    @RequestMapping(value = "/database/add_type", method = RequestMethod.POST)
+//    public String handleAddDatabaseType(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+//        DbqaUser user = DbqaUtil.getSessionUser(request);
+//        if(user == null) {
+//            return DbqaUtil.noAccessRedirect(redirectAttributes);
+//        }
+//
+//        String name = request.getParameter("name");
+//        String driver = request.getParameter("driver");
+//        String dialect = request.getParameter("dialect");
+//        String catalog = request.getParameter("catalog");
+//        String schema = request.getParameter("schema");
+//        boolean usernameAsSchema = request.getParameter("usernameAsSchema") != null;
+//
+//        if(catalog == null || catalog.isEmpty()) {
+//            catalog = null;
+//        }
+//        if(schema == null || schema.isEmpty()) {
+//            schema = null;
+//        }
+//
+//        DatabaseType databaseType = DatabaseDao.insertOrRetrieveDatabaseType(new DatabaseType(name, driver, dialect, catalog, schema, usernameAsSchema));
+//        if(databaseType != null) {
+//            redirectAttributes.addFlashAttribute("success", "Your database type has been added");
+//        } else {
+//            redirectAttributes.addFlashAttribute("error", "An error occurred");
+//        }
+//        return "redirect:/database/add";
+//    }
 }
