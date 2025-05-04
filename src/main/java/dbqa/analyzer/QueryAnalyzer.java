@@ -52,7 +52,7 @@ public class QueryAnalyzer {
 			if (i % 3 == 2) {
 				setOperator = setOperatorQueries.get(i);
 				queryIndex = startingIndex + query.indexOf(setOperator, leftQueryIndex);
-				generatedQuery = setOperatorQueries.get(i - 2) + " " + setOperator + "\r\n" + setOperatorQueries.get(i - 1);
+				generatedQuery = setOperatorQueries.get(i - 2) + setOperator + "\r\n" + setOperatorQueries.get(i - 1);
 				createAndAddParserResult(queryIndex, setOperator, generatedQuery, query, listOfResults);
 			}
 			//process query

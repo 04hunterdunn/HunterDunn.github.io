@@ -257,7 +257,8 @@ function handleCurrentFragment(fragment, fragIndex) {
 function addHighlightingAndExplanation(fragment, fragIndex, color) {
 	var stepFragment = fragment;
 	//processing WHERE or HAVING clause
-	if(!fragment.toUpperCase().startsWith("FROM") && !fragment.toUpperCase().startsWith("SELECT") && !fragment.toUpperCase().startsWith("LEFT") && !fragment.toUpperCase().startsWith("JOIN") && !fragment.toUpperCase().startsWith("GROUP BY") && !fragment.toUpperCase().startsWith("ORDER BY") && !fragment.toUpperCase().startsWith("UNION")) {
+	//changed this to account for Intersect and Except
+	if(!fragment.toUpperCase().startsWith("FROM") && !fragment.toUpperCase().startsWith("SELECT") && !fragment.toUpperCase().startsWith("LEFT") && !fragment.toUpperCase().startsWith("JOIN") && !fragment.toUpperCase().startsWith("GROUP BY") && !fragment.toUpperCase().startsWith("ORDER BY") && !fragment.toUpperCase().startsWith("UNION") && !fragment.toUpperCase().startsWith("INTERSECT") && !fragment.toUpperCase().startsWith("EXCEPT")) {
 		highlightWhereOrHaving(fragment, fragIndex, color);
 	}
 	//processing SELECT clause with a grouping function and grouped columns
@@ -363,12 +364,16 @@ function generateStepExplanation(fragment) {
 		 $("#stepExplanationText").text(finalString);
 	}
 
-	else if(upperCaseFragment.startsWith("INTERSECT ")) {
-
+	else if(upperCaseFragment.startsWith("INTERSECT")) {
+		let finalString = "Returns only the common rows between the results of two SELECT queries.";
+		$("#stepExplanationText").text(finalString);
 	}
-	else if(upperCaseFragment.startsWith("EXCEPT ")) {
 
+	else if(upperCaseFragment.startsWith("EXCEPT")) {
+		let finalString = "Retrieves all rows from the first query that are not present in the second query.";
+		$("#stepExplanationText").text(finalString);
 	}
+
 	//where or having clause
 	else {
 		if(upperCaseFragment.startsWith("AND ")) {
