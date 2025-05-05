@@ -29,7 +29,7 @@ public class QueryController {
         QueryExample queryExample = QueryExampleDao.getQueryExampleByType(queryType);
         String query = queryExample.getQuery();
         model.addAttribute("originalQuery", query);
-        return executeQuery(model, request, redirectAttributes, query, null, null);
+        return executeQuery(model, request, redirectAttributes, query, null, null, null);
     }
 
     @RequestMapping(value = "/query", method = RequestMethod.GET)
@@ -54,8 +54,9 @@ public class QueryController {
 
         String query = request.getParameter("query");
         String highlightPrevious = request.getParameter("highlightPrevious");
+        String displayStepExplanation = request.getParameter("displayStepExplanation");
         String limit = request.getParameter("limit");
-        return executeQuery(model, request, redirectAttributes, query, highlightPrevious, limit);
+        return executeQuery(model, request, redirectAttributes, query, highlightPrevious, displayStepExplanation, limit);
     }
 
     @ResponseStatus(value = HttpStatus.OK)
@@ -83,7 +84,7 @@ public class QueryController {
         }
     }
 
-    private String executeQuery(ModelMap model, HttpServletRequest request, RedirectAttributes redirectAttributes, String query, String highlightPrevious, String limit) {
+    private String executeQuery(ModelMap model, HttpServletRequest request, RedirectAttributes redirectAttributes, String query, String highlightPrevious, String displayStepExplanation, String limit) {
         Database database = (Database)request.getSession().getAttribute("selectedDatabase");
         QueryAnalyzer qa = new QueryAnalyzer(database, request);
         ArrayList<ParserResult> parserResults = new ArrayList();
@@ -109,6 +110,9 @@ public class QueryController {
                 model.addAttribute("originalQuery", query);
                 if(highlightPrevious != null) {
                     model.addAttribute("highlightPrevious", true);
+                }
+                if(displayStepExplanation != null) {
+                    model.addAttribute("displayStepExplanation", true);
                 }
                 model.addAttribute("limit", limit);
             } else {

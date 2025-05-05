@@ -64,8 +64,10 @@
 						<div class="form-group">
 							<label for="inputTextArea">Query:</label>
 							<div id="parentDisplay" style="padding-bottom:10px;">
-								<div class="form-control" id="displayDiv" style="height:140px; background-color:rgb(242,242,242);" <c:if test="${empty originalQuery}">onclick="addInputField();"</c:if>>
-									<textarea class="form-control" id="inputTextArea" rows="6" name="query" required <c:if test="${empty exceptionQuery}">style="display:none;"</c:if>><c:choose><c:when test="${exceptionQuery != null}">${exceptionQuery}</c:when><c:otherwise>${originalQuery}</c:otherwise></c:choose></textarea>
+								<div class="table-responsive">
+									<div class="form-control" id="displayDiv" style="height:140px; background-color:rgb(242,242,242);" <c:if test="${empty originalQuery}">onclick="addInputField();"</c:if>>
+										<textarea class="form-control" id="inputTextArea" rows="6" name="query" required <c:if test="${empty exceptionQuery}">style="display:none;"</c:if>><c:choose><c:when test="${exceptionQuery != null}">${exceptionQuery}</c:when><c:otherwise>${originalQuery}</c:otherwise></c:choose></textarea>
+									</div>
 								</div>
 							</div>
 							<button type="submit" id="submitBtn" class="btn btn-primary" onclick="toggleHtmlQuery()">Submit</button>
