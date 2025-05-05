@@ -521,6 +521,10 @@ public class QueryAnalyzer {
 		int indexOfSetOperator = -1;
 		String setOperatorPresent = "";
 
+		if (sql.endsWith(";")) {
+			sql = sql.substring(0,  sql.length()-1);
+		}
+
 		for(String setOperation: setOperationStrings) {
 			indexOfSetOperator = sql.toUpperCase().indexOf(setOperation);
 			if(indexOfSetOperator != -1) {
