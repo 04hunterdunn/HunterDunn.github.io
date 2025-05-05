@@ -36,6 +36,8 @@ public class QueryAnalyzer {
 		return this.database;
 	}
 
+
+	//added this method as to not repeat code
 	public ArrayList<ParserResult> parseQueryWithSetOperators(int startingIndex, String query, String outerQuery, ArrayList<ParserResult> listOfResults) throws ClassNotFoundException, SQLException{
 		ArrayList<String> setOperatorQueries = handleSetOperators(query);
 		if(setOperatorQueries == null) {

@@ -258,7 +258,7 @@ function addHighlightingAndExplanation(fragment, fragIndex, color) {
 	var stepFragment = fragment;
 	//processing WHERE or HAVING clause
 	//changed this to account for Intersect and Except
-	if(!fragment.toUpperCase().startsWith("FROM") && !fragment.toUpperCase().startsWith("SELECT") && !fragment.toUpperCase().startsWith("LEFT") && !fragment.toUpperCase().startsWith("JOIN") && !fragment.toUpperCase().startsWith("GROUP BY") && !fragment.toUpperCase().startsWith("ORDER BY") && !fragment.toUpperCase().startsWith("UNION") && !fragment.toUpperCase().startsWith("INTERSECT") && !fragment.toUpperCase().startsWith("EXCEPT")) {
+	if(!fragment.toUpperCase().startsWith("FROM") && !fragment.toUpperCase().startsWith("SELECT") && !fragment.toUpperCase().startsWith("LEFT") && !fragment.toUpperCase().startsWith("JOIN") && !fragment.toUpperCase().startsWith("GROUP BY") && !fragment.toUpperCase().startsWith("ORDER BY") && !fragment.toUpperCase().startsWith("UNION")  && !fragment.toUpperCase().startsWith("EXCEPT")  && !fragment.toUpperCase().startsWith("INTERSECT")) {
 		highlightWhereOrHaving(fragment, fragIndex, color);
 	}
 	//processing SELECT clause with a grouping function and grouped columns
