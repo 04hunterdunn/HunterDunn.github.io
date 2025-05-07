@@ -86,7 +86,7 @@ public class QueryAnalyzer {
 		String outerQuery = query;
 		String nestedQuery = getNestedSubQuery(query, 0);
 		if(nestedQuery != null) {
-			int startInnerQueryIndex = indexOfClause(query, nestedQuery);
+			int startInnerQueryIndex = query.indexOf(nestedQuery);
 			outerQuery = query.substring(0, startInnerQueryIndex);
 		}
 		if(containsSetOperation(outerQuery)) {
@@ -108,7 +108,7 @@ public class QueryAnalyzer {
 		while((subquery = getNestedSubQuery(fromClause, subIndex)) != null) {
 			queryNestingLevel++;
 			subIndex = fromClause.indexOf(subquery, subIndex);
-			int startInnerQueryIndex = indexOfClause(query, subquery);
+			int startInnerQueryIndex = query.indexOf(subquery);
 			outerQuery = query.substring(0, startInnerQueryIndex);
 			int outerQueryLength = outerQuery.length();
 			if(containsSetOperation(subquery)) {
@@ -129,7 +129,7 @@ public class QueryAnalyzer {
 			while((subquery = getNestedSubQuery(whereClause, subIndex)) != null) {
 				queryNestingLevel++;
 				subIndex = whereClause.indexOf(subquery, subIndex);
-				int startInnerQueryIndex = indexOfClause(query, subquery);
+				int startInnerQueryIndex = query.indexOf(subquery);
 				outerQuery = query.substring(0, startInnerQueryIndex);
 				int outerQueryLength = outerQuery.length();
 				if(containsSetOperation(subquery)) {
