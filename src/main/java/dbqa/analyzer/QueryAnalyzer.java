@@ -73,7 +73,7 @@ public class QueryAnalyzer {
 				if (outerQuery == null) {
 					parseQuery(queryIndex, setQuery, query, listOfResults);
 				} else {
-					parseQuery(queryIndex + outerQuery.length(), setQuery, outerQuery, listOfResults);
+					parseQuery(queryIndex + startingIndex, setQuery, outerQuery, listOfResults);
 				}
 				queryIndex += setQuery.length();
 			}
@@ -110,7 +110,7 @@ public class QueryAnalyzer {
 			subIndex = fromClause.indexOf(subquery, subIndex);
 			int startInnerQueryIndex = query.indexOf(subquery);
 			outerQuery = query.substring(0, startInnerQueryIndex);
-			int outerQueryLength = outerQuery.length();
+			int outerQueryLength = outerQuery.length() + startingIndex;
 			if(containsSetOperation(subquery)) {
 				parseQueryWithSetOperators(outerQueryLength, subquery, outerQuery, listOfResults);
 			} else {
@@ -131,7 +131,7 @@ public class QueryAnalyzer {
 				subIndex = whereClause.indexOf(subquery, subIndex);
 				int startInnerQueryIndex = query.indexOf(subquery);
 				outerQuery = query.substring(0, startInnerQueryIndex);
-				int outerQueryLength = outerQuery.length();
+				int outerQueryLength = outerQuery.length() + startingIndex;
 				if(containsSetOperation(subquery)) {
 					parseQueryWithSetOperators(outerQueryLength, subquery, outerQuery, listOfResults);
 				} else {
