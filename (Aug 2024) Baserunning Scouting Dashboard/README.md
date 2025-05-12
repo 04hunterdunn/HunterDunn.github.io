@@ -15,8 +15,7 @@ This year’s dataset will consist of multiple teams within a single farm system
 **Our Project:** We built an interactive baserunning scouting dashboard for the catcher and pitcher level. The dashboard can be used to scout opposing pitchers or catchers by visualizing potentially important plays (such as pickoffs and stolen base attempts) and comparing their tendencies to those of others at the same farm level.
 
 **What I was Responsible For:**
-I built the entire dashboard interface in RShiny and designed the initial template for all the data formatting pipelines. Also consulted and delegated tasks to other group members and ensured we remained on track.
-
+I helped with the back-end development, utilizing data wrangling and building data pipelines to further our data analysis for various farm systems.   I mainly used R and Python to carry out these tasks in VScode and RStudio. 
 **File Organization:**
 - Dashboard: Code for RShiny Baserunning Scouting Dashboard. Also contains tendency data and key play dataframes for the dashboard.
 - Pull Data: Area where data pipelines and general data analysis files are stored.
