@@ -2,9 +2,9 @@
 Working dashboard can be accessed at https://mnls2024.shinyapps.io/Baserunning_Scouting_Dashboard/
 
 **Shared File Space for SMT Data Challenge Project 2024 (Team ID: 31)**
+- Hunter Dunn (St. Thomas BS Computer Science/Data Science)
 - Luke Strassburg (University of Minnesota BS Data Science)
 - Jack Wain (University of Minnesota BS Statistical Science)
-- Hunter Dunn (St. Thomas BS Computer Science/Data Science)
 - Brennen Bruch (University of Minnesota BA Computer Science)
 
 **Prompt:**
@@ -16,6 +16,7 @@ This year’s dataset will consist of multiple teams within a single farm system
 
 **What I was Responsible For:**
 I helped with the back-end development, utilizing data wrangling and building data pipelines to further our data analysis for various farm systems.   I mainly used R and Python to carry out these tasks in VScode and RStudio. 
+
 **File Organization:**
 - Dashboard: Code for RShiny Baserunning Scouting Dashboard. Also contains tendency data and key play dataframes for the dashboard.
 - Pull Data: Area where data pipelines and general data analysis files are stored.
