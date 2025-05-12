@@ -250,6 +250,9 @@ function toggle(element) {
 
 function handleCurrentFragment(fragment, fragIndex) {
 	//start with unhighlighted html query
+	if(fragment.startsWith("UNION")) {
+		fragIndex = fragIndex;
+	}
 	htmlQuery = query.replace(/\n/g, '<br>');
 	addHighlightingAndExplanation(fragment, fragIndex, 'yellow');
 }
@@ -644,11 +647,12 @@ function updateFragInd(fragIndex) {
 	
 	//while no more line breaks before fragIndex are found
 	do {
+		//fixed this.  It would count too many numLineBreaksBeforeFragment sometimes if the query was long enough.
 		lineBreakInd = query.indexOf('\n', lineBreakInd+1);
-		if(lineBreakInd != -1 && lineBreakInd < fragIndex) {
+		if(lineBreakInd != -1 && (lineBreakInd + numLineBreaksBeforeFragment) < fragIndex) {
 			numLineBreaksBeforeFragment++;
 		}
-	} while(lineBreakInd != -1 && lineBreakInd < fragIndex);
+	} while(lineBreakInd != -1 && (lineBreakInd + numLineBreaksBeforeFragment) < fragIndex);
 	
 	return fragIndex + 2*numLineBreaksBeforeFragment;
 }
