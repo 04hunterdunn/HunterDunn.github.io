@@ -36,7 +36,7 @@ Data was obtained from the **TCO bioengineering department** using the following
 **Hypothesis:** ACLR + ALL surgery will perform best overall.
 
 ## Model Selection
-Initially planned to use **ANOVA**, but due to data formatting issues, we used **one-sample t-tests** instead.
+Initially planned to use **ANOVA**, but due to data formatting issues, we used **paied-sample t-tests** instead.
 
 - **44 t-tests** run per rotation (5 rotations).
 - **Bonferroni correction** applied: `alpha = 0.05 / 44 = 0.001136`.
