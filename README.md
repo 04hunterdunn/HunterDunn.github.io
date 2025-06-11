@@ -7,11 +7,11 @@ This past spring semester, I worked on my professors own database management sys
 ### Other Projects
 
 I have provided a deeper dive into each project within their correspoding folder.
--**TCO ACL Reconstruction Surgery**: Used 220 paired sample t-tests in order to find that ACLR + ML LET, a suregry to repair a torn ACL, restores the knee closest to the intact knee of any other ACL reconstruction surgery but tends to limit the mobility of the knee.
--**SMT Data Challenge**: Built an interactive dashboard using **RShiny** and **RStudio** intended for baserunners in all Major League Ball Clubs and their associated farm teams as a means to scout various pitchers and/or catcher tendencies when runners are on base in order to gain a competitive advantage on the basepaths. 
--**Fantasy Football Database**: Created a Fantasy Football Database system in VS Code that allows users to create leagues, teams, and add or draft players to every team.
+- **TCO ACL Reconstruction Surgery**: Used 220 paired sample t-tests in order to find that ACLR + ML LET, a suregry to repair a torn ACL, restores the knee closest to the intact knee of any other ACL reconstruction surgery but tends to limit the mobility of the knee.
+- **SMT Data Challenge**: Built an interactive dashboard using **RShiny** and **RStudio** intended for baserunners in all Major League Ball Clubs and their associated farm teams as a means to scout various pitchers and/or catcher tendencies when runners are on base in order to gain a competitive advantage on the basepaths. 
+- **Fantasy Football Database**: Created a Fantasy Football Database system in VS Code that allows users to create leagues, teams, and add or draft players to every team.
 
 ### Skills
 
--Languages: Java, Python, C, SQL, R, HTML, Javascript, CSS
--Tools: Microsft Azure, Power BI, Tableau, RStudio, VS Code, IntelliJ, GitHub, Excel, Snowflake, SQLite
+- **Languages**: Java, Python, C, SQL, R, HTML, Javascript, CSS
+- **Tools**: Microsft Azure, Power BI, Tableau, RStudio, VS Code, IntelliJ, GitHub, Excel, Snowflake, SQLite
