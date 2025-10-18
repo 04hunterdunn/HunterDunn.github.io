@@ -31,8 +31,11 @@ It allows users to track job applications, including company name, position, and
 4. Run the backend server:
 
 ### Frontend Setup
-1. npm install
-2. npm start
+1. Navigate to the frontend folder (if seperate):
+2. Install Dependencies
+   npm install
+3. Start the frontend
+   npm start
 The frontend will connect to the backend API and allow you to manage job applications through a browser.
 
 ### REST API Endpoints
@@ -42,7 +45,3 @@ The frontend will connect to the backend API and allow you to manage job applica
 | POST   | /api/jobs      | Add a new job application       |
 | PUT    | /api/jobs/{id} | Update a job application by ID  |
 | DELETE | /api/jobs/{id} | Delete a job application by ID  |
-
-```bash
-./mvnw spring-boot:run   # Linux/Mac
-mvnw spring-boot:run     # Windows
