@@ -36,11 +36,12 @@ It allows users to track job applications, including company name, position, and
 The frontend will connect to the backend API and allow you to manage job applications through a browser.
 
 ### REST API Endpoints
-# Method       # Endpoint       # Description
-GET            /api/jobs        Retrieve all job applications
-POST           /api/jobs        Add a new job application
-PUT            /api/jobs/{id}   Update a job application by ID
-DELETE         /api/jobs/{id}   Delete a job application by ID
+| Method | Endpoint       | Description                     |
+|--------|----------------|---------------------------------|
+| GET    | /api/jobs      | Retrieve all job applications   |
+| POST   | /api/jobs      | Add a new job application       |
+| PUT    | /api/jobs/{id} | Update a job application by ID  |
+| DELETE | /api/jobs/{id} | Delete a job application by ID  |
 
 ```bash
 ./mvnw spring-boot:run   # Linux/Mac
