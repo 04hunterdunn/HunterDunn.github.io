@@ -27,8 +27,11 @@ Performed 220 paired sample t-tests to evaluate the effectiveness of various ACL
 Designed and built an interactive **RShiny** dashboard for MLB and minor league baserunners. The tool helps scout opposing pitchers and catchers to identify tendencies with runners on base, providing a strategic edge.
 - **Fantasy Football Database**
 Developed a command-line fantasy football system using **VS Code** that allows users to create leagues, manage teams, and draft players. The system simulates real-world fantasy league operations with basic CRUD functionality.
+- **Job Application Tracker**
+Built a full-stack **Java Spring Boot** backend connected to a **MySQL** database, with a **React** frontend planned for future integration. The project provides a REST API for managing job applications (CRUD operations) with field validation, database persistence, and Postman-tested endpoints. Demonstrates backend development, database integration, API design, and full-stack project structuring.
+
 
 ### Technical Skills
 
-- **Languages**: Java, Python, C, SQL, R, HTML, Javascript, CSS
-- **Tools**: Microsft Azure, Power BI, Tableau, RStudio, VS Code, IntelliJ, GitHub, Excel, Snowflake, SQLite
+- **Languages**: Java, Python, C, SQL, R, HTML, Javascript, CSS, TypeScript
+- **Tools**: Microsft Azure, Power BI, Tableau, RStudio, VS Code, IntelliJ, GitHub, Excel, Snowflake, SQLite, Maven, Node.js, npm, Postman
