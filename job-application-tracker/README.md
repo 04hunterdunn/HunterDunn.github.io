@@ -32,10 +32,16 @@ It allows users to track job applications, including company name, position, and
 
 ### Frontend Setup
 1. Navigate to the frontend folder (if seperate):
-2. Install Dependencies
-   ```npm install```
+2. Install Dependencies 
+
+   ```bash
+   npm install
+   ```
 3. Start the frontend
-   ```npm start```
+
+   ```bash
+   npm start
+   ```
 The frontend will connect to the backend API and allow you to manage job applications through a browser.
 
 ### REST API Endpoints
