@@ -1,0 +1,12 @@
+name: Baserunning_Scouting_Dashboard
+title: Baserunning_Scouting_Dashboard
+username: lstrass27
+account: lstrass27
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12407577
+bundleId: 8945765
+url: https://lstrass27.shinyapps.io/Baserunning_Scouting_Dashboard/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

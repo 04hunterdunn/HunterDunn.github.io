@@ -1,0 +1,66 @@
+CREATE TABLE NFL_teams (
+ NFL_team_id INTEGER PRIMARY KEY,
+ team_name TEXT
+);
+
+CREATE TABLE FantasyPlayers (
+ player_id INTEGER PRIMARY KEY,
+ player_name TEXT,
+ Position TEXT,
+ NFL_team_id TEXT,
+ FOREIGN KEY (NFL_team_id) REFERENCES NFL_teams(NFL_team_id)
+);
+
+CREATE TABLE League (
+ leauge_id INTEGER PRIMARY KEY,
+ league_name TEXT,
+ championship_id INTEGER
+);
+
+CREATE TABLE Users (
+ user_id INTEGER PRIMARY KEY,
+ fname TEXT,
+ lname TEXT,
+ email TEXT
+);
+
+CREATE TABLE FantasyTeams (
+ team_id INTEGER PRIMARY KEY,
+ user_id INTEGER,
+ team_name TEXT,
+ league_id TEXT,
+ Wins INTEGER,
+ Loses INTEGER,
+ Ties INTEGER,
+ FOREIGN KEY (league_id) REFERENCES League (leauge_id),
+ FOREIGN KEY (user_id) REFERENCES Users (user_id)
+);
+
+CREATE TABLE TeamPerformance (
+ team_id INTEGER,
+ week_num INTEGER,
+ points_scored INTEGER,
+ opponent_id INTEGER,
+ Win BOOLEAN,
+ FOREIGN KEY (opponent_id) REFERENCES FantasyTeams (team_id),
+ FOREIGN KEY (team_id) REFERENCES FantasyTeams (team_id),
+ PRIMARY KEY (team_id, week_num)
+);
+
+CREATE TABLE PlayerOnFantasyTeam (
+ team_id INTEGER,
+ player_id INTEGER,
+ league_id INTEGER,
+ FOREIGN KEY (league_id) REFERENCES League (leauge_id),
+ FOREIGN KEY (player_id) REFERENCES FantasyPlayers (player_id),
+ FOREIGN KEY (team_id) REFERENCES FantasyTeams (team_id),
+ PRIMARY KEY (team_id, player_id, league_id)
+);
+
+CREATE TABLE PlayerPerformance (
+ player_id INTEGER,
+ week_num INTEGER,
+ points_scored INTEGER,
+ FOREIGN KEY (player_id) REFERENCES FantasyPlayers (player_id),
+ PRIMARY KEY (player_id, week_num)
+);
